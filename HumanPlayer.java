@@ -1,5 +1,3 @@
-import java.util.Scanner;
-
 public class HumanPlayer extends Player {
 
     boolean stand = false;
@@ -10,7 +8,8 @@ public class HumanPlayer extends Player {
         this.bet = 0;
     }
 
-
+    /* Offers choice to player of hit, stand, fold, double-down.  Only exits while-loop when a valid input is
+    * accepted and performs related actions.*/
     public void firstChoiceOfTurn() {
         boolean firstChoice = true;
         this.stand = false;
@@ -57,6 +56,8 @@ public class HumanPlayer extends Player {
         }
     }
 
+    /* Offers player who has not already busted, folded or chosen "stand" next available turn choices, hit or stand.
+    * Loop only exits if player chooses stand or their handValue exceeds 21.  */
     public void nextChoicesOfTurn() {
         while (this.getHandValue() != 0 & this.stand != true) {
             GameLogic.delayText();
@@ -86,6 +87,7 @@ public class HumanPlayer extends Player {
         }
     }
 
+    /* makeTurnChoice is the only abstract method each subclass of Player must define for turn-logic in game. */
     public void makeTurnChoice() {
         firstChoiceOfTurn();
         nextChoicesOfTurn();
@@ -105,6 +107,9 @@ public class HumanPlayer extends Player {
         this.bet *= 2;
     }
 
+    /* Takes input from HumanPlayer as to how much they want to bet.  Validates input is a number first through a
+    * while-loop, try-catch blocks, and boolean flag, then validates it is an acceptable number for the HumanPlayer
+    * to bet.  */
     public void placeBet() {
         int betInt = 0;
         boolean legalBet = false;

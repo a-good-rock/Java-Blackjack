@@ -16,6 +16,8 @@ public abstract class Player {
         this.bet = 0;
     }
 
+    /* Adds String key from deck's deckKeys List to Player's handOfCards ArrayList.  Prints Player's handOfCards
+    * and checks HandValue.  */
     public void hit() {
         GameLogic.delayText();
         System.out.println(this.name + ": Hit");
@@ -33,7 +35,7 @@ public abstract class Player {
         addHandValue();
         }
 
-
+    /* Prints Player's name and handOfCards ArrayList */
     public void getHandOfCards() {
         System.out.println();
         System.out.println(this.name + ": ");
@@ -45,7 +47,8 @@ public abstract class Player {
         System.out.println();
     }
 
-
+    /* Resets handValue int to 0.  Converts each Object in handOfCards ArrayList to String and uses it as key to
+    * retrieve corresponding value from deck's Hashmap.  Adds values into handValue  and calls aceCorrection.  */
     void addHandValue() {
         handValue = 0;
         for (Object card: handOfCards) {
@@ -56,6 +59,8 @@ public abstract class Player {
         aceCorrection();
     }
 
+    /* Counts number of aces in handOfCards ArrayList.  If handValue is greater than 21, subtracts 10 points from
+    * handValue and 1 point from aceCounter until handValue is less than 21 or aceCounter is 0.  */
     public void aceCorrection() {
         int aceCounter = 0;
         for (Object card: handOfCards) {
@@ -68,6 +73,7 @@ public abstract class Player {
         }
     }
 
+    /* Clears round-specific player settings if handValue is greater than 21. */
     public boolean bustCheck() {
         if (handValue > 21) {
             GameLogic.delayText();

@@ -8,7 +8,7 @@ public class GameLogic {
     List<HumanPlayer> playerList;
     DealerPlayer dealer;
     Deck deck;
-    static Scanner inputScanner;
+    static Scanner inputScanner;  // Scanner all classes will use to take input.  Closes at end of startGame().
 
     public GameLogic(DealerPlayer dealer, Deck deck) {
         this.dealer = dealer;
@@ -17,7 +17,7 @@ public class GameLogic {
         inputScanner = new Scanner(System.in);
     }
 
-    public static void delayText() {
+    public static void delayText() { //Frequently used short-hand static method for use in place of lengthy TimeUnit method call.
         try {
             TimeUnit.MILLISECONDS.sleep(1200);
         } catch (InterruptedException ex) {
@@ -118,6 +118,7 @@ public class GameLogic {
         }
     }
 
+    /* Instantiates Iterator to traverse playerList and remove player if their money is 0 */
     public void bankruptcyCheck() {
         Iterator iterator = playerList.iterator();
         while (iterator.hasNext()) {
@@ -131,6 +132,8 @@ public class GameLogic {
         }
     }
 
+    /*Checks if playerList is empty and takes input if player wishes to play again.  If yes, askForPlayers() is called
+    * again, repopulating playerList and keeping the game going within bounds of startGame()' s while-loop. */
     public void endGameCheck() {
         if (playerList.isEmpty()) {
             delayText();
@@ -148,6 +151,7 @@ public class GameLogic {
         }
     }
 
+    /* Check's to see if all players in playerList have busted or folded already to prevent dealer playing unnecessarily.  */
     public boolean skipDealerTurn() {
         for (Player player : playerList) {
             if (player.getHandValue() != 0) {
@@ -157,6 +161,8 @@ public class GameLogic {
         return true;
     }
 
+    /* startGame() is the method which actually runs the Blackjack simulator once an instance of GameLogic is created.
+    * startGame() only ends when all players have lost and they choose not to play again.  */
     public void startGame() {
         offerInstructions();
         askForPlayers();

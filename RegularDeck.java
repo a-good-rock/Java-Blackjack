@@ -5,7 +5,7 @@ import java.util.Random;
 
 public class RegularDeck implements Deck {
     private HashMap deck;
-    private List deckKeys;
+    private List deckKeys; // used to store keys of Hashmap deck and return random Object through dealcard() /
     Random r;
 
     public RegularDeck(){
@@ -17,6 +17,7 @@ public class RegularDeck implements Deck {
         deckKeys.addAll(deck.keySet());
     }
 
+    /* uses Random r to return random key value from deckKeys */
     public Object dealCard() {
         return deckKeys.get(r.nextInt(deckKeys.size()));
     }
